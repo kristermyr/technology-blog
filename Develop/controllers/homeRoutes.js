@@ -3,7 +3,7 @@ const router = require('express').Router();
 // const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
- res.render('main');
+ res.render('login');
     });
 
     // // Serialize data so the template can read it
