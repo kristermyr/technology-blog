@@ -1,44 +1,45 @@
-const router = require('express').Router();
+const router = require("express").Router();
 // const { Project, User } = require('../models');
 // const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
- res.render('homepage');
-    });
+router.get("/", async (req, res) => {
+  res.render("homepage");
+});
 
+router.get("/signup", async (req, res) => {
+  res.render("signup");
+});
 
-    //login page
-    router.get('/login', (req, res) => {
-        // If the user is already logged in, redirect the request to another route
-        if (req.session.loggedIn) {
-          res.redirect('/profile');
-          return;
-        }
-      
-        res.render('login');
-      });
+//login page
+router.get("/login", (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.loggedIn) {
+    res.redirect("/profile");
+    return;
+  }
 
+  res.render("login");
+});
 
 //dashboard
 
-router.get('/dashboard', (req, res) => {
-    // If the user is already logged in, redirect the request to another route
-    if (req.session.loggedIn) {
-      res.redirect('/dashboard');
-      return;
-    }
-  
-    res.render('login');
-  });
-    // // Serialize data so the template can read it
-    // const projects = projectData.map((project) => project.get({ plain: true }));
+router.get("/dashboard", (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.loggedIn) {
+    res.redirect("/dashboard");
+    return;
+  }
 
-    // // Pass serialized data and session flag into template
-    // res.render('homepage', { 
-    //   projects, 
-    //   logged_in: req.session.logged_in 
-    // });
- 
+  res.render("login");
+});
+// // Serialize data so the template can read it
+// const projects = projectData.map((project) => project.get({ plain: true }));
+
+// // Pass serialized data and session flag into template
+// res.render('homepage', {
+//   projects,
+//   logged_in: req.session.logged_in
+// });
 
 // router.get('/project/:id', async (req, res) => {
 //   try {
@@ -82,7 +83,4 @@ router.get('/dashboard', (req, res) => {
 //   }
 // });
 
-
-
 module.exports = router;
-
