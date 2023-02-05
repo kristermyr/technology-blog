@@ -6,6 +6,30 @@ router.get('/', async (req, res) => {
  res.render('homepage');
     });
 
+
+    //login page
+    router.get('/login', (req, res) => {
+        // If the user is already logged in, redirect the request to another route
+        if (req.session.loggedIn) {
+          res.redirect('/profile');
+          return;
+        }
+      
+        res.render('login');
+      });
+
+
+//dashboard
+
+router.get('/dashboard', (req, res) => {
+    // If the user is already logged in, redirect the request to another route
+    if (req.session.loggedIn) {
+      res.redirect('/dashboard');
+      return;
+    }
+  
+    res.render('login');
+  });
     // // Serialize data so the template can read it
     // const projects = projectData.map((project) => project.get({ plain: true }));
 
@@ -58,15 +82,7 @@ router.get('/', async (req, res) => {
 //   }
 // });
 
-// router.get('/login', (req, res) => {
-//   // If the user is already logged in, redirect the request to another route
-//   if (req.session.logged_in) {
-//     res.redirect('/profile');
-//     return;
-//   }
 
-//   res.render('login');
-// });
 
 module.exports = router;
 
