@@ -6,43 +6,19 @@ router.get("/", async (req, res) => {
   res.render("homepage");
 });
 
-router.get("/signup", async (req, res) => {
-  res.render("signup");
+router.get('/login', (req, res) => {
+   
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+
+    res.render('login');
 });
 
-//login page
-router.post('/login', async (req, res) => {
-    try {
-      const userData = await User.findOne({ where: { email: req.body.email } });
-  
-      if (!userData) {
-        res
-          .status(400)
-          .json({ message: 'Incorrect email or password, please try again' });
-        return;
-      }
-  
-      const validPassword = await userData.checkPassword(req.body.password);
-  
-      if (!validPassword) {
-        res
-          .status(400)
-          .json({ message: 'Incorrect email or password, please try again' });
-        return;
-      }
-  
-      req.session.save(() => {
-        req.session.user_id = userData.id;
-        req.session.logged_in = true;
-        
-        res.json({ user: userData, message: 'You are now logged in!' });
-      });
-  
-    } catch (err) {
-      res.status(400).json(err);
-    }
-  });
-
+router.get('/signup', (req, res) => {
+    res.render('signup');
+});
 //dashboard
 
 router.get("/dashboard", (req, res) => {
@@ -54,6 +30,9 @@ router.get("/dashboard", (req, res) => {
 
   res.render("login");
 });
+
+
+
 // // Serialize data so the template can read it
 // const projects = projectData.map((project) => project.get({ plain: true }));
 
