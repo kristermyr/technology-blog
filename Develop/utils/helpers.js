@@ -7,7 +7,7 @@
       // format large numbers with commas
       return parseInt(amount).toLocaleString();
     },
-    get_emoji: () => {
+    get_emoji: () => {R
       const randomNum = Math.random();
   
       // Return a random emoji
