@@ -11,12 +11,12 @@ const newPostFormHandler = async (event) => {
         headers: { 'Content-Type': 'application/json' },
         
       });
-      console.log("before",title,content);
+      
       if (response.ok) {
         document.location.replace('/dashboard');
       } else {
         alert(response.statusText);
-      }console.log("middle",title,content);
+      }
     }
     
   document.querySelector('#new-post-form')
