@@ -1,19 +1,15 @@
-const newPostHandler = async (event) => {
+const newPostFormHandler = async (event) => {
     event.preventDefault();
   
-    const title = document.querySelector('#post-title').value.trim();
-    const content = document.querySelector('#post-text').value.trim();
+    const title = document.querySelector('#post-title').value;
+    const content = document.querySelector('#post-content').value;
     
-    
-
     const response = await fetch('/api/posts', {
         method: 'POST',
         body: JSON.stringify({ title, content }),
-        title,
-        content, 
 
         headers: { 'Content-Type': 'application/json' },
-        loggedIn: true
+        
       });
       console.log("before",title,content);
       if (response.ok) {
@@ -22,6 +18,6 @@ const newPostHandler = async (event) => {
         alert(response.statusText);
       }console.log("middle",title,content);
     }
-    console.log("after",title,content);
+    
   document.querySelector('#new-post-form')
-  .addEventListener('#create-post', newPostHandler);
+  .addEventListener('#create-post', newPostFormHandler);
