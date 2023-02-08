@@ -4,12 +4,9 @@ const User = require('./User');
 // 11-Ins_Partials models
 // 18-Stu_Session
 
-User.hasMany(Post, {
-    foreignKey: 'user_id'
-  });
-
 Post.belongsTo(User, {
-    foreignKey: 'user_id'
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
   });
 
 
