@@ -9,6 +9,9 @@ router.get("/dashboard", async (req, res) => {
   res.render("dashboard", {loggedIn:req.session.loggedIn});
 });
 
+router.get("/dashboard/newpost", async (req, res) => {
+  res.render("newpost",{loggedIn:req.session.loggedIn});
+});
 router.get('/login', (req, res) => {
    
     if (req.session.loggedIn) {
