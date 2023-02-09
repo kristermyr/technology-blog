@@ -1,29 +1,28 @@
 const router = require("express").Router();
-const { Post, User } = require('../models');
-const withAuth = require('../utils/auth');
+const { Post, User } = require("../models");
+const withAuth = require("../utils/auth");
 
-router.get("/", async (req, res) => {
-  res.render("homepage", {loggedIn:req.session.loggedIn});
-});
+// router.get("/", async (req, res) => {
+//   res.render("homepage", {loggedIn:req.session.loggedIn});
+// });
 router.get("/dashboard", async (req, res) => {
-  res.render("dashboard", {loggedIn:req.session.loggedIn});
+  res.render("dashboard", { loggedIn: req.session.loggedIn });
 });
 
 router.get("/dashboard/newpost", async (req, res) => {
-  res.render("newpost",{loggedIn:req.session.loggedIn});
+  res.render("newpost", { loggedIn: req.session.loggedIn });
 });
-router.get('/login', (req, res) => {
-   
-    if (req.session.loggedIn) {
-        res.redirect('/');
-        return;
-    }
+router.get("/login", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
 
-    res.render('login');
+  res.render("login");
 });
 
-router.get('/signup', (req, res) => {
-    res.render('signup');
+router.get("/signup", (req, res) => {
+  res.render("signup");
 });
 //dashboard
 
@@ -37,27 +36,29 @@ router.get("/dashboard", (req, res) => {
   res.render("login");
 });
 //getting PostData from DB on to homepage
-router.get('/', async (req, res) => {
-	try {
-		const postData = await Post.findAll({
-			include: [{
-				model: Post,
-				attributes: ['title','content','date_created'],
-			},],
-		});
-
-		const posts = postData.map((post) => post.get({
-			plain: true
-		}));
-
-		res.render('homepage', {
-			posts,
-			loggedIn: req.session.loggedIn
-		});
-	} catch (err) {
-		res.status(500).json(err);
-	}
+router.get("/", async (req, res) => {
+  Post.findAll({
+    model:Post,
+    
+  })
+    .then((postData) => {
+      const posts = postData.map((post) =>
+        post.get({
+          plain: true,
+        })
+        
+      ); 
+      console.log('Postdata',posts)
+        
+      res.render("homepage", {
+        posts,
+        loggedIn: req.session.loggedIn,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
-
 
 module.exports = router;

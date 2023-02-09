@@ -29,14 +29,12 @@ router.post('/', async (req, res) => {
 //login rout
 router.post('/login', async (req, res) => {
   console.log("login route: ", req.body)
-  // try {
-    console.log("before the findOne call")
 
     const userData = await User.findOne({
        where: { username: req.body.name } });
       console.log("after the findOne call")
     if (!userData) {
-      console.log("userdata not found")
+      
       res
         .status(400)
         .json({ message: 'User not found' });
