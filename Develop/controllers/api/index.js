@@ -6,4 +6,6 @@ const { User,Post } = require('../../models');
 
 router.use('/users', userRoutes);
 router.use('/posts', postRoutes);
+
+
 module.exports = router;

@@ -4,6 +4,7 @@ const { User,Post } = require('../../models');
 
 
 router.post("/",withAuth, async (req,res) => {
+    console.log('checking',req.body)
     Post.create({
             title: req.body.title,
             content: req.body.content,
