@@ -47,3 +47,7 @@ sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => console.log("Now listening"));
 });
 
+app.use(function (req, res, next) {
+  res.locals.session = req.session;
+  next();
+});
