@@ -38,6 +38,7 @@ router.get("/dashboard", (req, res) => {
 //getting PostData from DB on to homepage
 router.get("/", async (req, res) => {
   Post.findAll({
+    include:{model:User},
     model:Post,
     
   })
