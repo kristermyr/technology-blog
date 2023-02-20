@@ -10,7 +10,7 @@ router.get("/dashboard", async (req, res) => {
   router.get("/", async (req, res) => {
     Post.findAll({
       where: {
-        user_id: req.session.usder_id
+        user_id: req.session.user_id
       },
       attributes: [
       'id',
@@ -37,3 +37,4 @@ router.get("/dashboard", async (req, res) => {
         res.status(500).json(err);
       });
   });
+  module.exports = router;

@@ -61,35 +61,32 @@ router.get("/", async (req, res) => {
       res.status(500).json(err);
     });
 });
-router.get("/post/:id", (req, res) => {
-  Post.findOne({
-    where: {
-      id: req.params.id
-    },
-    attributes: [
-      'id',
-      'content',
-      'title',
-      'date_created'
-    ],
-  })
-    .then((postData) => {
-      const posts = postData.map((post) =>
-        post.get({
-          plain: true,
-        })
-        
-      ); 
-      console.log('Postdata',posts)
-        
-      res.render("dashboard", {
-        posts,
-        loggedIn: req.session.loggedIn,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+
+router.get('/post/:id', async (req, res) => {
+	try {
+		const postData = await Post.findByPk(req.params.id, {
+			include: [
+				{
+					model: User,
+					attributes: ['username'],
+				}, {
+					model: Comment,
+					include: [User]
+				}
+			],
+		});
+
+    const post = postData.get({
+			plain: true
+		});
+
+		res.render('single-post', {
+			...post,
+			loggedIn: req.session.loggedIn
+		});
+	} catch (err) {
+		res.status(500).json(err);
+	}
 });
+
 module.exports = router;
