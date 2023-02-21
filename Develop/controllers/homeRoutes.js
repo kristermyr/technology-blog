@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Post, User, Comment } = require("../models");
+const { Post, User } = require("../models");
 const withAuth = require("../utils/auth");
 
 // router.get("/", async (req, res) => {
@@ -80,7 +80,7 @@ router.get('/post/:id', async (req, res) => {
 			plain: true
 		});
 
-		res.render('single-post', {
+		res.render('post', {
 			...post,
 			loggedIn: req.session.loggedIn
 		});
@@ -88,5 +88,4 @@ router.get('/post/:id', async (req, res) => {
 		res.status(500).json(err);
 	}
 });
-
 module.exports = router;

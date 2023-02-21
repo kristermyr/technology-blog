@@ -1,16 +1,15 @@
-<div class="posts">
-  
-    <article class="card">
-        <div class="card-header flex-row justify-space-between">
-            <h2>
-                <a href="/post/{{post.id}}">{{post.title}}</a>
-            </h2>
-            <div>
-                Posted by {{User.username}} on {{format_date post.date_created}}
-            </div>
-        </div>
-        <div class="card-body">
-            {{body}}
-        </div>
-    </article>
+<div class="text">
+	<div class="container postBoxCont">
+		<div class="row headerRow">
+			<div class="col-8">
+				<h2 class="postTitle text-uppercase">{{post.title}}</h2>
+			</div>
+			<p class="text-center postDescTwo">{{post.content}}</p>
+			<div class="col-4">
+				<p class="postCreate text-right">Created by {{user.username}} on {{format_date post.date_created}}</p>
+			</div>
+		</div>
+		</div>	
 </div>
+
+		<script src="/js/comments.js"></script>
