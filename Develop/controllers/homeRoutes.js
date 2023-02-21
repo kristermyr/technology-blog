@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Post, User } = require("../models");
+const { Post, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 
 // router.get("/", async (req, res) => {
@@ -9,8 +9,8 @@ router.get("/dashboard", async (req, res) => {
   res.render("dashboard", { loggedIn: req.session.loggedIn });
 });
 
-router.get("/dashboard/newpost", async (req, res) => {
-  res.render("newpost", { loggedIn: req.session.loggedIn });
+router.get("/dashboard/newpost", withAuth, async (req, res) => {
+  res.render("newpost");
 });
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
@@ -26,15 +26,15 @@ router.get("/signup", (req, res) => {
 });
 //dashboard
 
-router.get("/dashboard", (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  if (req.session.loggedIn) {
-    res.render("dashboard");
-    return;
-  }
+// router.get("/dashboard", (req, res) => {
+//   // If the user is already logged in, redirect the request to another route
+//   if (req.session.loggedIn) {
+//     res.render("dashboard");
+//     return;
+//   }
 
-  res.render("login");
-});
+//   res.render("login");
+// });
 //getting PostData from DB on to homepage
 router.get("/", async (req, res) => {
   Post.findAll({
@@ -62,7 +62,7 @@ router.get("/", async (req, res) => {
     });
 });
 
-router.get('/post/:id', async (req, res) => {
+router.get('/post/:id', withAuth, async (req, res) => {
 	try {
 		const postData = await Post.findByPk(req.params.id, {
 			include: [
@@ -87,5 +87,29 @@ router.get('/post/:id', async (req, res) => {
 	} catch (err) {
 		res.status(500).json(err);
 	}
+});
+router.get('/dashboard', withAuth, async (req, res) => {
+  try {
+      const userData = await User.findByPk(req.session.user_id, {
+          attributes: {
+              exclude: ['password']
+          },
+          include: [{
+              model: Post
+          }],
+      });
+
+      const user = userData.get({
+          plain: true
+          
+      }); console.log(user);
+
+      res.render('dashboard', {
+          ...user,
+          logged_in: true
+      });
+  } catch (err) {
+      res.status(500).json(err);
+  }
 });
 module.exports = router;

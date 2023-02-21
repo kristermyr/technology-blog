@@ -1,4 +1,4 @@
-{{#if posts.length }}
+
 <section>
     <ol>
         {{#each posts as |post| }}
@@ -22,10 +22,4 @@
         <a href='/dashboard/newpost'><button type='button' id='post-btn'>+ New Post</button></a>
     </div>
 </div>
-{{else}}
-<div id='post-btn-div' class="row">
-    <div class="col-1">
-        <a href='/dashboard/newpost'><button type='button' id='post-btn'>+ New Post</button></a>
-    </div>
-</div>
-{{/if}}
+
