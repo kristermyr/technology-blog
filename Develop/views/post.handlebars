@@ -1,19 +1,21 @@
-<div class="text">
-	<div class="container postBoxCont">
-		<div class="row headerRow">
-			<div class="col-8">
-				<h2 class="postTitle text-uppercase">{{title}}</h2>
+<div>
+	<div class="card">
+		<div>
+			<div>
+				<h2 class="title is-4">{{title}}</h2>
 			</div>
-			<p class="text-center postDescTwo">{{content}}</p>
-			<div class="col-4">
-				<p class="postCreate text-right">Created by {{User.username}} on {{format_date date_created}}</p>
+			<div class="content">
+			<p>{{content}}</p>
+			<div>
+				<p>Created by {{User.username}} on {{format_date date_created}}</p>
+			</div>
 			</div>
 		</div>
-		</div>	
+			
         
 
-		<form class="new-comment-form formCont d-flex flex-wrap justify-content-center" data-postid={{id}}>
-			<div class="textAreaCont p-2">
+		<form class="new-comment-form" data-postid={{id}}>
+			<div>
 				<textarea id='comment_content' name="comment-body"
 				placeholder="Enter a comment here..."
 				cols="30"
@@ -23,15 +25,17 @@
 				<button class="button btn btn-success" type="submit">Add Comment</button>
 			</div>
 		</form>
-
+</div>
 		
 
-		<h2 class="text-center">Comments</h2>
+		<h2 class="title is-4">Comments</h2>
+		
 		{{#each Comments as |comment|}}
 		<div class="commentCont">
-			<p class="text-center commentText">{{comment.comment_content}}</p>
-			<p class="text-center commentOwner"><span>~</span>Created by {{comment.User.username}} on {{format_date date_created}}<span>~</span></p>
+			<p class="subtitle is-4">{{comment.comment_content}}</p>
+			<p class="subtitle is-6">Created by {{comment.User.username}} on {{format_date date_created}}</p>
 		</div>
+		<br>
 		{{/each}} 
 </div>
 

@@ -1,31 +1,32 @@
 {{#if posts.length }}
 <section>
+    <div>
+    <div>
+        <a href='/dashboard/newpost'><button type='button' class="button is-clear" >+ New Post</button></a>
+    </div>
+</div>
     <ol>
         {{#each posts as |post| }}
-        <li class='row border'>
-            <article class='col-10'>
-                <div id='blog-header' class='row'>
-                    <div id='blog-title' class='col-1'>
+        <li>
+            <article>
+                <div>
+                    <div class="title is-2">
                         <a href='/dashboard/edit/{{post.user_id}}'>{{post.title}}</a>
                     </div>
-                    <div  id='blog-date' class="col-1">
+                    <div >
                         <span>{{format_date post.date_created}}</span>
                     </div>
                 </div>
             </article>
-        </li>
+        </li><br>
         {{/each}}
     </ol>
 </section>
-<div id='post-btn-div' class="row">
-    <div class="col-1">
-        <a href='/dashboard/newpost'><button type='button' id='post-btn'>+ New Post</button></a>
-    </div>
-</div>
+
 {{else}}
-<div id='post-btn-div' class="row">
-    <div class="col-1">
-        <a href='/dashboard/newpost'><button type='button' id='post-btn'>+ New Post</button></a>
+<div>
+    <div>
+        <a href='/dashboard/newpost'><button type='button' >+ New Post</button></a>
     </div>
 </div>
 {{/if}}

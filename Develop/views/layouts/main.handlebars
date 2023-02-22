@@ -9,22 +9,26 @@
 </head>
 
 <body>
-  <div class="wrapper">
-      <header class="hero">
-          <div>
-            <nav class"navbar">
-                    <a id="navbar-item" class="link" href="/">Home</a>
-                    <a class="link" href="/dashboard">Dashboard</a>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+ 
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/">Home</a>
+      <a class="navbar-item" href="/dashboard">Dashboard</a>
+      <div class="buttons">
                     {{#if loggedIn}}
-                    <a class="link" href="/" id="logout">Logout</a>
+                    <a class="navbar-item button is-primary" href="/" id="logout">Logout</a>
                     {{else}}
-                    <a class="link" href="/login">Login</a>
+                    <a class="navbar-item button is-primary" href="/login">Login</a>
                     {{/if}}
-                </nav>          
-          </div>
+                    <a class="navbar-item button is-primary" href="/signup">Sign up</a>
 
-          <h1>The Tech Blog</h1>
-      </header>
+        </div>
+    </div>
+
+  </div>
+</nav>
+<br>
 
     <main>
       {{{ body }}}
