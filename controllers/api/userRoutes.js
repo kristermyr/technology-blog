@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 });
 
 
-//login rout
+//login route
 router.post('/login', async (req, res) => {
   console.log("login route: ", req.body)
 
@@ -41,10 +41,10 @@ router.post('/login', async (req, res) => {
         .json({ message: 'User not found' });
       return;
     }
-    console.log("userData: ", userData);
+    
 
     const validPassword = await userData.checkPassword(req.body.password);
-    console.log("validPassword: ", validPassword);
+    
     if (!validPassword) {
       res
         .status(400)
@@ -60,10 +60,8 @@ router.post('/login', async (req, res) => {
       res.json({ user: userData, message: 'You are now logged in!' });
     });
 
-  // } catch (err) {
-  //   res.status(400).json(err);
-  // }
 });
+
 //logout route
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
