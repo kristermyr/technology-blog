@@ -2,6 +2,7 @@ const router = require("express").Router();
 const withAuth = require('../../utils/auth');
 const { User,Post, Comment } = require('../../models');
 
+//creates new user
 
 router.post("/",withAuth, async (req,res) => {
     console.log('checking',req.body)
